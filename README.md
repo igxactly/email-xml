@@ -3,6 +3,8 @@ email-xml
 
 E-Mail XML-Schema (XSD) Specification
 
+This specification does not address that layer of complexity.
+
 Example:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
