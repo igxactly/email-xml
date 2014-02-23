@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:element name="E-Mail">
+		<xs:annotation>
+			<xs:documentation>electronic mail messages - inspired by rfc2822</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Version" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>XML-Schema Version: 1.0</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="8"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="Message-ID" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The "Message-ID:" field provides a unique message identifier that refers to a particular version of a particular message. Use a real random UUID.</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string"/>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="Date" type="xs:dateTime" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The origination date specifies the date and time at which the creator
+of the message indicated that the message was complete and ready to
+enter the mail delivery system. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="From" type="AddressType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>From</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Sender" type="AddressType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Sender</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Reply-To" type="AddressType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>reply-to</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="To" type="AddressType" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>The "To:" field contains the address(es) of the primary recipient(s) of the message.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Cc" type="AddressType" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>The "Cc:" field (where the "Cc" means "Carbon Copy" in the sense of
+making a copy on a typewriter using carbon paper) contains the addresses of others who are to receive the message, though the content of the message may not be directed at them.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Bcc" type="AddressType" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>The "Bcc:" field (where the "Bcc" means "Blind Carbon Copy") contains addresses of recipients of the message whose addresses are not to be revealed to other recipients of the message.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="In-Reply-To" type="AddressType" minOccurs="0"/>
+				<xs:element name="Subject" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Betreff</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string"/>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="Body" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Text</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:simpleContent>
+							<xs:extension base="xs:base64Binary">
+								<xs:attribute name="Content-Type"/>
+							</xs:extension>
+						</xs:simpleContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Attachment" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Filename">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="255"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="Size" type="xs:long" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Filesize in bytes</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Content" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Base64 encoded binary data</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:base64Binary"/>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="References" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string"/>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="Comments" minOccurs="0" maxOccurs="unbounded">
+					<xs:simpleType>
+						<xs:restriction base="xs:string"/>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="Keywords" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>phrase *("," phrase)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Trace" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="Resent-Message-ID" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="Resent-Date" type="xs:dateTime" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="Resent-From" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="Resent-Sender" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="Resent-To" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="Resent-Cc" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="Resent-Bcc" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="Optional-Field" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Key" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>field-name</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string"/>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="Value" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>ftext          </xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string"/>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="AddressType">
+		<xs:annotation>
+			<xs:documentation>E-Mail Address and Name</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Address">
+				<xs:annotation>
+					<xs:documentation>E-Mail Address</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="255"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Name" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string"/>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
