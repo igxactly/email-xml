@@ -7,8 +7,9 @@ Example:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <E-Mail>
-    <Message-ID>20061212192447.3C952890B21@domain.com</Message-ID>
-    <Date>2012-05-19 11:30:00</Date>
+    <Version>1.0</Version>
+	<Message-ID>C60C5C82-9910-0001-0057-19301EBDA400</Message-ID>
+	<Date>2001-12-17T09:30:47.0Z</Date>
     <From>
         <Address>from@domain.com</Address>
         <Name>Firstname1 Lastname1</Name>
